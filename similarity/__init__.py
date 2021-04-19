@@ -9,9 +9,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 class Similarity:
             
-    def __init__(self,update=True,language='portuguese'):
+    def __init__(self,update=True,language='english',nltk_downloads=[]):
         self.language=language
-        self.parametes=['stopwords','rslp','punkt']
+        self.parametes=['stopwords','rslp','punkt'].append(nltk_downloads)
         self.remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
         if update == True:
             self.nltk_download()
