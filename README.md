@@ -6,6 +6,14 @@ Similarity uses the most advanced AI resources to identify semantic equality bet
 
 pip install SimilarityText
 
+## Parametres
+```
+Similarity(
+  update=True,
+  language='English'
+)
+```
+
 ## Example
 
 ```
