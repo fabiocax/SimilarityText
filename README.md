@@ -18,7 +18,7 @@ Similarity(
 
 ```
 from similarity import Similarity
-a=Similarity(update=False)
+a=Similarity()
 print(a.similarity('La Casa de Papel','La Casa de papel'))
 ```
 
