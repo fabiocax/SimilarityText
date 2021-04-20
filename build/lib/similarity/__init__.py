@@ -220,6 +220,7 @@ class Similarity:
     def __init__(self,update=True,language='english',langdetect=False,nltk_downloads=[],quiet=True):
         self.__language=language
         self.__langdetect=langdetect
+        self.__quiet=quiet
         self.__remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
         parametes=['stopwords','rslp','punkt']+nltk_downloads
         if update == True:
@@ -240,15 +241,18 @@ class Similarity:
 
     def similarity(self,text_a,text_b):
         "This function receive text_a , text_b and return float number 1,0 to 0,0 (1.0 equals) "
+        from sklearn.metrics.pairwise import cosine_similarity
+        from sklearn.feature_extraction.text import TfidfVectorizer
         lang=self.__language
         if self.__langdetect == True:
             a=self.detectlang(text_a)
             b=self.detectlang(text_b)
             if a == b:
                 lang=a
+                if self.__quiet==False:
+                    print('Language detect = '+lang)
             else:
-                raise Exception("Lang not equals")
-        print(lang)
+                raise Exception("Lang not equals "+a+" and "+b+"")
         sent_tokens = nltk.sent_tokenize(text_b, language=lang)
         sent_tokens.append(text_a.lower())
         TfidfVec = TfidfVectorizer(tokenizer=self.__LemNormalize, stop_words=stopwords.words(lang))
@@ -259,3 +263,5 @@ class Similarity:
         flat.sort()
         req_tfidf = flat[-2]
         return req_tfidf
+
+        

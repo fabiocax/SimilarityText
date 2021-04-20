@@ -6,7 +6,7 @@ def installs(file):
 
 setup(
     name="SimilarityText",
-    version="0.1.7",
+    version="0.2.0",
     author= "Fabio Alberti",
     author_email = "fabiocax@gmail.com",
     description="Find the similarity between two texts using AI",

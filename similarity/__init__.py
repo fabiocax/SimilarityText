@@ -7,6 +7,7 @@ import random
 import string
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
+from nltk.stem import RSLPStemmer
 from langdetect import detect
 
 LANGUAGES = [
@@ -241,6 +242,8 @@ class Similarity:
 
     def similarity(self,text_a,text_b):
         "This function receive text_a , text_b and return float number 1,0 to 0,0 (1.0 equals) "
+        from sklearn.metrics.pairwise import cosine_similarity
+        from sklearn.feature_extraction.text import TfidfVectorizer
         lang=self.__language
         if self.__langdetect == True:
             a=self.detectlang(text_a)
@@ -261,3 +264,68 @@ class Similarity:
         flat.sort()
         req_tfidf = flat[-2]
         return req_tfidf
+
+class Classification:
+    def __init__(self,language='english'):
+        self.dados=[]
+        self.language=language
+        
+    def __Tokenize(self,sentence):
+        sentence = sentence.lower()
+        sentence = nltk.word_tokenize(sentence)
+        return sentence
+
+    def __Stemming(self,sentence):
+        stemmer = RSLPStemmer()
+        phrase = []
+        for word in sentence:
+            phrase.append(stemmer.stem(word.lower()))
+        return phrase
+
+    def __RemoveStopWords(self,sentence):
+        stopwords = nltk.corpus.stopwords.words(self.language)
+        phrase = []
+        for word in sentence:
+            if word not in stopwords:
+                phrase.append(word)
+        return phrase
+    
+    def learning(self,training_data):
+        corpus_words = {}
+        for data in training_data:
+            frase = data['word']
+            frase = self.__Tokenize(frase)
+            frase = self.__Stemming(frase)
+            frase = self.__RemoveStopWords(frase)
+            class_name = data['class']
+            if class_name not in list(corpus_words.keys()):
+                corpus_words[class_name] = {}
+            for word in frase:
+                if word not in list(corpus_words[class_name].keys()):
+                    corpus_words[class_name][word] = 1
+                else:
+                    corpus_words[class_name][word] += 1
+        self.dados= corpus_words
+
+
+
+    def calculate_class_score(self,sentence,class_name):
+        score = 0 
+        sentence = self.__Tokenize(sentence)
+        sentence = self.__Stemming(sentence)
+        for word in sentence:
+            if word in self.dados[class_name]:
+                score += self.dados[class_name][word]
+        return score
+
+    def calculate_score(self,sentence):
+        high_score = 0
+        classname = 'default'
+        for classe in self.dados.keys():
+            pontos = 0
+            pontos = self.calculate_class_score(sentence,classe)
+            if pontos > high_score:
+                high_score = pontos
+                classname = classe
+        return classname,high_score
+    
