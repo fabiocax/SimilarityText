@@ -7,3 +7,4 @@ scipy
 sklearn
 threadpoolctl
 tqdm
+langdetect
