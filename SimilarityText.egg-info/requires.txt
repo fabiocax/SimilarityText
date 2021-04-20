@@ -1,0 +1,10 @@
+click
+joblib
+nltk
+regex
+scikit-learn
+scipy
+sklearn
+threadpoolctl
+tqdm
+langdetect

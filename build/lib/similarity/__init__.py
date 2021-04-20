@@ -220,7 +220,6 @@ class Similarity:
     def __init__(self,update=True,language='english',langdetect=False,nltk_downloads=[],quiet=True):
         self.__language=language
         self.__langdetect=langdetect
-        self.__quiet=quiet
         self.__remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
         parametes=['stopwords','rslp','punkt']+nltk_downloads
         if update == True:
@@ -247,10 +246,9 @@ class Similarity:
             b=self.detectlang(text_b)
             if a == b:
                 lang=a
-                if self.__quiet==False:
-                    print('Language detect = '+lang)
             else:
-                raise Exception("Lang not equals "+a+" and "+b+"")
+                raise Exception("Lang not equals")
+        print(lang)
         sent_tokens = nltk.sent_tokenize(text_b, language=lang)
         sent_tokens.append(text_a.lower())
         TfidfVec = TfidfVectorizer(tokenizer=self.__LemNormalize, stop_words=stopwords.words(lang))

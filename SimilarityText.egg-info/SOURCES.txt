@@ -1,0 +1,8 @@
+README.md
+setup.py
+SimilarityText.egg-info/PKG-INFO
+SimilarityText.egg-info/SOURCES.txt
+SimilarityText.egg-info/dependency_links.txt
+SimilarityText.egg-info/requires.txt
+SimilarityText.egg-info/top_level.txt
+similarity/__init__.py
