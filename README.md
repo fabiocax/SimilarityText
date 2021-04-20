@@ -9,9 +9,12 @@ pip install SimilarityText
 ## Parametres
 ```
 Similarity(
-  update=True,
-  language='English'
-)
+      update=True,
+      language='english',
+      langdetect=False,
+      nltk_downloads=[],
+      quiet=True
+  )
 ```
 
 ## Example
