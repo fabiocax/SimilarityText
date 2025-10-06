@@ -1,5 +1,5 @@
 
-from similarity import Similarity
+from similarity import Similarity, Classification
 
 
 

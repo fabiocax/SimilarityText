@@ -1,0 +1,17 @@
+# Core dependencies
+click
+joblib
+nltk
+regex
+scikit-learn
+scipy
+threadpoolctl
+tqdm
+langdetect
+numpy
+
+# Optional: Advanced AI features (transformers)
+# Uncomment the line below to enable transformer-based similarity and classification
+# sentence-transformers>=2.0.0
+# torch>=1.9.0
+# transformers>=4.0.0
