@@ -1,0 +1,28 @@
+# Include documentation files
+include README.md
+include LICENSE
+include CHANGELOG.md
+include CONTRIBUTING.md
+include API.md
+include CLAUDE.md
+include PUBLISHING.md
+
+# Include requirements
+include requirements.txt
+
+# Include examples
+recursive-include example *.py
+
+# Exclude unnecessary files
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude .DS_Store
+global-exclude *.so
+global-exclude .git*
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+
+# Exclude build artifacts
+prune build
+prune dist
+prune *.egg-info
